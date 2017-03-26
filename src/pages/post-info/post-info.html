@@ -1,0 +1,55 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+		  	<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			Post Info
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="home" padding>
+	<div *ngIf="post" class="selection">
+		<ion-card>
+			<ion-item text-wrap>
+				<h1>{{post.title}}</h1>
+				<p>{{post.body}}</p>
+			</ion-item>
+		</ion-card>
+	</div>
+	<div class="selection">
+		<ion-item>
+			<button (click)="toggleForm()">
+				Show/Hide Form 
+			</button>
+		</ion-item>
+	</div>
+	<div [hidden]="!showForm">
+		<form (ngSubmit)="logForm()">
+			<ion-item>
+			  	<ion-label>Gender</ion-label>
+			  	<ion-select [(ngModel)]="todo.gender"  [ngModelOptions]="{standalone: true}">
+			    	<ion-option value="f" selected="true">Female</ion-option>
+			    	<ion-option value="m">Male</ion-option>
+			  	</ion-select>
+			</ion-item>
+		  	<ion-item>
+		    	<ion-label>Todo</ion-label>
+		    	<ion-input type="text" [(ngModel)]="todo.title" name="title"></ion-input>
+		  	</ion-item>
+		  	<ion-item>
+		    	<ion-label>Description</ion-label>
+		    	<ion-textarea [(ngModel)]="todo.description" name="description"></	ion-textarea>
+		  	</ion-item>
+		  	<button ion-button type="submit" block>Add Todo</button>
+		</form>
+	</div>
+	<h2>All Post (localForage)</h2>
+	<ion-list>	
+		<ion-item *ngFor="let mypost of myposts">
+			<h2>{{mypost.title}}</h2>
+		</ion-item>
+	</ion-list>
+</ion-content>
+
